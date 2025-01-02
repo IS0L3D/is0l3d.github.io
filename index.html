@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="generator" content="Hugo 0.140.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div id="vanta-globe"></div>
+
+    <div class="content">
+        <h1>Página Principal</h1>
+        <div><h1 id="hello-world">Hello World</h1>
+</div>
+    </div>
+
+    <script src="/js/three.min.js"></script>
+    <script src="/js/vanta.globe.min.js"></script>
+    <script>
+        VANTA.GLOBE({
+            el: "#vanta-globe",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            size: 1.2,
+            color: 0x0077ff,
+            color2: 0xff7700,
+            backgroundColor: 0x000000
+        });
+    </script>
+</body>
+</html>
