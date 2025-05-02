@@ -1,0 +1,105 @@
+@font-face {
+  font-family: 'Hurmit Nerd Font';
+  src: url('/fonts/HurmitNerdFont-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DepartureMono Nerd Font';
+  src: url('/fonts/DepartureMonoNerdFont-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tinos Nerd Font';
+  src: url('/fonts/TinosNerdFont-Regular.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#vanta-globe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70vw;
+  height: 10vh;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 60%, rgba(255, 255, 255, 0));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 2.5vw;
+}
+
+.navbar li.left-item { 
+  font-family: 'Hurmit Nerd Font';
+  position: absolute; left: 1vw;
+  letter-spacing: 0.20em;
+  font-weight: bold;
+}
+
+.navbar li.right-item { 
+  font-family: 'DepartureMono Nerd Font';
+}
+
+.navbar li {
+  display: inline;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #0077ff;
+}
+
+.navbar .left-item a:hover {
+  color: #000;
+}
+  
+footer {
+  font-family: 'Tinos Nerd Font';
+  text-align: center;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 0.9rem;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 8vh;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.5);
+}
+  
+footer p {
+  margin: 5px 0;
+}

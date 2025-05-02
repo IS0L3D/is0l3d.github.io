@@ -1,91 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta name="generator" content="Hugo 0.140.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="UTF-8">
-    <title>IS0L3D</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <title>IS0L3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sitio personal de José Eduardo Arrucha Álvarez, Ciberseguridad">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"  href="/css/bio.css" 
+  >
 
 </head>
 <body>
-    <div id="vanta-globe"></div>
+  <div id="vanta-globe"></div>
+  <nav class="navbar" aria-label="Navegación principal">
+    <ul>
+        <li class="left-item"><a href="/">IS0L3D</a></li>
+        <li class="right-item"><a href="/">Bio</a></li>
+        <li class="right-item"><a href="/notas/">Notas</a></li>
+        <li class="right-item"><a href="/writeups/">Writeups</a></li>
+    </ul>
+  </nav>
+  
+  <div class="content">
+    <div class="profile-section">
+      <div class="profile-photo">
+        <figure>
+          <img src="/img/profile.jpg" alt="Foto de perfil de José Eduardo Arrucha Álvarez">
+          <figcaption>José Eduardo Arrucha Álvarez</figcaption>
+        </figure>
+      </div>
+      <div class="about-me">
+        <h1>Sobre Mí</h1>
+        <p>Soy un apasionado de la ciberseguridad con un enfoque especial en el análisis y explotación de vulnerabilidades en tecnologías web.</p>
+      </div>
+    </div>
 
-    <nav class="navbar">
+    <div class="lists-section">
+      <div class="list">
+        <h2>Intereses</h2>
         <ul>
-            <li class="left-item"><a href="/">IS0L3D</a></li>
-            <li><a href="/">Bio</a></li>
-            <li><a href="/notas">Notas</a></li>
-            <li><a href="/writeups">Writeups</a></li>
+          
+            <li>Red Teaming</li>
+          
+            <li>Aprendizaje Autodidacta</li>
+          
+            <li>Natación</li>
+          
         </ul>
-    </nav>
+      </div>
+      <div class="list">
+        <h2>Credenciales</h2>
+        <ul>
+          
+            <li>Estudiante T.I. en Benemérita Universidad Autónoma de Puebla</li>
+          
+            <li>Profesional Certificado en Ciberseguridad por Google (2024)</li>
+          
+        </ul>
+      </div>
+    </div>
 
-    <div class="content">
-        <div class="profile-section">
-            <div class="profile-photo">
-                <img src="/img/profile.jpg" alt="Foto de perfil">
-                <figcaption>José Eduardo Arrucha Álvarez</figcaption>
-            </div>
-            <div class="about-me">
-                <h1>Sobre Mí</h1>
-                <p>Soy un entusiasta de la ciberseguridad con un enfoque especial en el análisis y explotación de vulnerabilidades en tecnologías web. Disfruto investigando y desafiando los límites de los sistemas, siempre con el objetivo de aprender y fortalecer su seguridad.</p>
-            </div>
-        </div>    
+    <div class="cv-download">
+      <a href="/docs/CV_EduardoArrucha.pdf" target="_blank" class="download-button">Descargar CV</a>
+    </div>
 
-        <div class="lists-section">
-            <div class="list">
-                <h2>Intereses</h2>
-                <ul>
-                    <li>Pentesting</li>
-                    <li>CTF</li>
-                    <li>Natación</li>
-                </ul>
-            </div>
-            <div class="list">
-                <h2>Credenciales</h2>
-                <ul>
-                    <li>Estudiante T.I. en Benemérita Universidad Autónoma de Puebla</li>
-                    <li>Profesional Certificado en Ciberseguridad por Google (2024)</li>
-                </ul>
-            </div>
-        </div>
-    
-        <div class="cv-download">
-            <a href="/docs/resume.pdf" target="_blank" class="download-button">Descargar CV</a>
-        </div>
+    <div class="image-section">
+      <h2>Talks</h2>
+      <img src="/img/talk.jpg" alt="Talks">
+    </div>
 
-        <div class="image-section">
-            <h2>Talks</h2>
-            <img src="/img/talk.jpg" alt="Talks">
-        </div>
-    
-        <div class="image-section">
-            <h2>News</h2>
-            <a href="https://oem.com.mx/elsoldepuebla/local/estudiantes-buap-se-posicionan-en-el-cuarto-lugar-del-hack-defender-19596123" target="_blank">https://oem.com.mx/elsoldepuebla/local/estudiantes-buap-se-posicionan-en-el-cuarto-lugar-del-hack-defender-19596123</a>
-        </div>
-    </div>    
+    <div class="image-section">
+      <h2>News</h2>
+      <a href="https://oem.com.mx/elsoldepuebla/local/estudiantes-buap-se-posicionan-en-el-cuarto-lugar-del-hack-defender-19596123" target="_blank">https://oem.com.mx/elsoldepuebla/local/estudiantes-buap-se-posicionan-en-el-cuarto-lugar-del-hack-defender-19596123</a>
+    </div>
+  </div>
 
-    <script src="/js/three.min.js"></script>
-    <script src="/js/vanta.globe.min.js"></script>
-    <script>
-        VANTA.GLOBE({
-            el: "#vanta-globe",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.0,
-            scaleMobile: 1.0,
-            size: 1.2,
-            color: 0x0077ff,
-            color2: 0xff7700,
-            backgroundColor: 0x000000
-        });
-    </script>
-    <footer>
-        <p>&copy; 2025 Made with ❤️ by is0l3d. Todos los derechos reservados.</p>
-        <p>Contacto: www.linkedin.com/in/arruchaeduardo</p>
-    </footer>
+
+  <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.globe.min.js"></script>
+  <script src="/js/vanta.effect.js"></script>
+  <footer>
+    <p>&copy; 2025 Made with ❤️ by IS0L3D. Todos los derechos reservados.</p>
+    <p>Contacto: <a href="https://www.linkedin.com/in/arruchaeduardo" target="_blank">https://www.linkedin.com/in/arruchaeduardo</a></p>
+  </footer>
 </body>
 </html>
