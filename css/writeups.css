@@ -1,8 +1,491 @@
-.writeups-container {
+/* Layout de 3 columnas para seccion Writeups */
+.wp-grid {
+  background-color: rgba(40, 40, 40, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 26px;
   font-family: 'Hurmit Nerd Font';
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  margin-top: 11dvh;
+  margin-left: 2dvh;
+  margin-right: 2dvh;
+  overflow-y: auto;
+  max-height: calc(100dvh - 20dvh);
+  display: grid;
+  grid-template-columns: 240px 1fr 240px;
+  gap: 1.2rem;
+  color: #fff;
+}
+
+.wp-grid.wp-grid-list-notas {
+  grid-template-columns: 240px minmax(0, 1fr);
+}
+
+.wp-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+/* Inline code */
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.95em;
+  background-color: rgba(255, 255, 255, 0.07);
+  color: #f2f2f2;
+  padding: 0.2em 0.4em;
+  border-radius: 5px;
+  white-space: break-spaces;
+}
+
+/* Code blocks */
+pre {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+  background-color: #10141a;
+  color: #f8f8f2;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Fijar sidebars mientras se hace scroll */
+.wp-left,
+.wp-right {
+  position: sticky;
+  top: 5dvh;
+  align-self: start;
+  max-height: calc(100dvh - 5dvh);
+  overflow: auto;
+}
+
+/* Centro */
+.wp-center {
+  min-width: 0;
+}
+
+.wp-header h1 {
+  margin-bottom: 0.2rem;
+}
+
+.wp-desc {
+  margin: 0.2rem 0 0.6rem;
+  opacity: 0.85;
+}
+
+.wp-meta {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+/* Sidebar de categorias */
+.wp-nav h3 {
+  margin: 0 0 0.65rem;
+  color: #e8f8ff;
+}
+
+.wp-nav details {
+  margin: 0 0 0.5rem;
+  border: 1px solid rgba(130, 207, 255, 0.24);
+  border-radius: 10px;
+  padding: 0.45rem 0.7rem;
+  background: linear-gradient(180deg, rgba(12, 26, 38, 0.6), rgba(9, 19, 29, 0.5));
+}
+
+.wp-nav summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+
+.wp-nav summary a {
+  color: #dbf2ff;
+  text-decoration: none;
+}
+
+.wp-nav summary a:hover {
+  color: #7ac9ff;
+}
+
+.wp-nav ul {
+  list-style: none;
+  padding-left: 0.85rem;
+  margin: 0.5rem 0 0.15rem;
+}
+
+.wp-nav li a {
+  text-decoration: none;
+  color: #f2f8ff;
+}
+
+.wp-nav li a:hover {
+  color: #7ac9ff;
+}
+
+.wp-nav li.active > a {
+  color: #66c2ff;
+  text-decoration: underline;
+}
+
+/* TOC / navegacion */
+.toc-box {
+  border-left: 2px solid rgba(123, 198, 255, 0.2);
+  padding-left: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.toc-box nav {
+  max-height: inherit;
+  overflow: auto;
+}
+
+.toc-box ul {
+  margin: 0.2rem 0;
+}
+
+.toc-box h4 {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.toc-box a {
+  color: #cfefff;
+}
+
+.toc-box a:hover {
+  color: #7ac9ff;
+}
+
+/* Lista de writeups en /writeups */
+.wp-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.wp-item {
+  padding: 0.6rem 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wp-item h3 {
+  margin: 0;
+}
+
+.wp-item small {
+  opacity: 0.7;
+}
+
+.wp-item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.wp-item a:hover {
+  text-decoration: underline;
+}
+
+.wp-list-divider {
+  width: 100%;
+  height: 1px;
+  margin: 0.85rem 0 1rem;
+  background: linear-gradient(90deg, rgba(122, 201, 255, 0), rgba(122, 201, 255, 0.9), rgba(122, 201, 255, 0));
+}
+
+.wp-drawer-toggle,
+.wp-drawer-overlay,
+.wp-drawer-toolbar {
+  display: none;
+}
+
+/* Responsive only for smaller screens; desktop style remains unchanged */
+@media (max-width: 1100px) {
+  .wp-drawer-toolbar-single {
+    display: flex;
+    position: fixed;
+    top: 84px;
+    left: 0;
+    right: 0;
+    height: 58px;
+    z-index: 230;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(8, 20, 34, 0.88), rgba(8, 20, 34, 0.52));
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(132, 209, 255, 0.18);
+  }
+
+  .wp-drawer-toolbar-single .wp-drawer-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: fit-content;
+    max-width: 90vw;
+    border: 1px solid rgba(132, 209, 255, 0.45);
+    border-radius: 14px;
+    padding: 0.5rem 0.9rem;
+    background: linear-gradient(145deg, rgba(14, 56, 86, 0.96), rgba(11, 35, 58, 0.92));
+    color: #dff3ff;
+    font-family: 'DepartureMono Nerd Font';
+    font-size: 0.86rem;
+    letter-spacing: 0.03em;
+    box-shadow: 0 10px 26px rgba(3, 12, 22, 0.48);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .wp-grid {
+    grid-template-columns: 220px minmax(0, 1fr);
+    max-height: none;
+    overflow: visible;
+    margin-top: 86px;
+  }
+
+  .wp-right {
+    grid-column: 1 / -1;
+    position: static;
+    max-height: none;
+  }
+
+  .toc-box {
+    border-left: none;
+    border-top: 2px solid rgba(122, 201, 255, 0.26);
+    padding-left: 0;
+    padding-top: 0.8rem;
+  }
+
+  .wp-grid-single {
+    grid-template-columns: 1fr;
+    margin-top: 158px;
+  }
+
+  .wp-grid-single .wp-left {
+    display: none;
+  }
+
+  .wp-grid-single .wp-center {
+    order: 1;
+  }
+
+  .wp-grid-single .wp-right {
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translateX(110%);
+    width: min(85vw, 340px);
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: 148px 0.95rem 1rem;
+    overflow-y: auto;
+    background:
+      radial-gradient(circle at 80% 10%, rgba(60, 151, 220, 0.16), transparent 38%),
+      linear-gradient(196deg, rgba(8, 23, 42, 0.96), rgba(10, 32, 55, 0.92) 44%, rgba(22, 24, 50, 0.96));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-left: 1px solid rgba(130, 207, 255, 0.32);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: -20px 0 40px rgba(3, 11, 22, 0.45), inset 1px 0 0 rgba(130, 207, 255, 0.2);
+    z-index: 270;
+    transition: transform 0.24s ease;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .wp-grid-single .wp-right.is-open {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .wp-grid-single .toc-box {
+    border: 1px solid rgba(129, 207, 255, 0.2);
+    border-radius: 14px;
+    border-top: 1px solid rgba(129, 207, 255, 0.2);
+    padding: 0.85rem;
+    background: rgba(12, 26, 38, 0.66);
+  }
+}
+
+@media (max-width: 800px) {
+  .wp-drawer-toolbar-list {
+    display: flex;
+    position: fixed;
+    top: 84px;
+    left: 0;
+    right: 0;
+    height: 58px;
+    z-index: 230;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(8, 20, 34, 0.88), rgba(8, 20, 34, 0.52));
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(132, 209, 255, 0.18);
+  }
+
+  .wp-drawer-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: auto;
+    z-index: 1;
+    width: fit-content;
+    max-width: 90vw;
+    min-width: 0;
+    margin: 0;
+    border: 1px solid rgba(132, 209, 255, 0.45);
+    border-radius: 14px;
+    padding: 0.5rem 0.9rem;
+    background: linear-gradient(145deg, rgba(14, 56, 86, 0.96), rgba(11, 35, 58, 0.92));
+    color: #dff3ff;
+    font-family: 'DepartureMono Nerd Font';
+    font-size: 0.86rem;
+    letter-spacing: 0.03em;
+    box-shadow: 0 10px 26px rgba(3, 12, 22, 0.48);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .wp-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 255;
+    background: radial-gradient(circle at 50% 15%, rgba(16, 56, 84, 0.22), rgba(0, 0, 0, 0.62));
+  }
+
+  .wp-drawer-overlay.is-open {
+    display: block;
+  }
+
+  .wp-grid {
+    grid-template-columns: 1fr;
+    margin-left: 1dvh;
+    margin-right: 1dvh;
+    margin-top: 158px;
+    padding: 0.8rem;
+    gap: 0.9rem;
+  }
+
+  .wp-drawer-toolbar-single {
+    display: grid;
+    place-items: center;
+  }
+
+  .wp-drawer-toolbar-single .wp-drawer-toggle {
+    display: inline-flex;
+    width: auto;
+    max-width: calc(100vw - 2rem);
+    margin: 0 auto;
+  }
+
+  .wp-grid-list {
+    height: calc(100dvh - 270px);
+    margin-top: 168px;
+    overflow: hidden;
+  }
+
+  .wp-grid-single {
+    height: calc(100dvh - 258px);
+    overflow: hidden;
+  }
+
+  .wp-grid-single .wp-center {
+    display: block;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 0.15rem;
+  }
+
+  .wp-grid-single .wp-header {
+    position: static;
+  }
+
+  .wp-grid-single .wp-content {
+    min-height: auto;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .wp-left,
+  .wp-right {
+    position: static;
+    top: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  /* LIST: categorias drawer + navegacion visible arriba del listado */
+  .wp-grid-list .wp-left {
+    order: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-110%);
+    width: min(85vw, 340px);
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: 86px 0.95rem 1rem;
+    overflow-y: auto;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(60, 151, 220, 0.16), transparent 38%),
+      linear-gradient(168deg, rgba(8, 23, 42, 0.96), rgba(10, 32, 55, 0.92) 44%, rgba(22, 24, 50, 0.96));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-right: 1px solid rgba(130, 207, 255, 0.32);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 20px 0 40px rgba(3, 11, 22, 0.45), inset -1px 0 0 rgba(130, 207, 255, 0.2);
+    z-index: 270;
+    transition: transform 0.24s ease;
+  }
+
+  .wp-grid-list .wp-left.is-open {
+    transform: translateX(0);
+  }
+
+  .wp-grid-list .wp-right {
+    display: none;
+  }
+
+  .wp-grid-list .wp-center {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .wp-grid-list .wp-list-head {
+    flex: 0 0 auto;
+  }
+
+  .wp-grid-list .wp-list-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 0.15rem;
+  }
+
+  /* SINGLE: boton Contenido + drawer derecho, sin boton categorias */
+  pre {
+    padding: 0.85rem;
+  }
 }

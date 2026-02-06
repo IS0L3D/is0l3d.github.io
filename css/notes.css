@@ -6,3 +6,13 @@
   align-items: center;
   height: 100vh;
 }
+
+/* Responsive only for smaller screens; desktop style remains unchanged */
+@media (max-width: 1024px) {
+  .notes-container {
+    min-height: calc(100vh - 150px);
+    height: auto;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+}

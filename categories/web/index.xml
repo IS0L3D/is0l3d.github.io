@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web on IS0L3D</title>
+    <link>http://localhost:1313/categories/web/</link>
+    <description>Recent content in Web on IS0L3D</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Sun, 07 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Workflow rapido con Burp</title>
+      <link>http://localhost:1313/notas/web/workflow-burp/</link>
+      <pubDate>Sun, 07 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notas/web/workflow-burp/</guid>
+      <description>Secuencia corta para proxy, crawling, repeater y validacion.</description>
+    </item>
+  </channel>
+</rss>

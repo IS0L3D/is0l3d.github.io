@@ -28,18 +28,36 @@
   box-sizing: border-box;
 }
 
+html {
+  background: #071322;
+  min-height: 100%;
+}
+
+body {
+  background: transparent;
+  min-height: 100%;
+}
+
 #vanta-globe {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  z-index: -1;
+  height: 100dvh;
+  min-height: 100svh;
+  z-index: 0;
+  pointer-events: none;
   overflow: hidden;
+  background: #071322;
+}
+
+.site-main {
+  position: relative;
+  z-index: 1;
 }
 
 .navbar {
-  position: fixed;
+  position: fixed !important;
   top: 0;
   left: 0;
   width: 70vw;
@@ -48,7 +66,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 1200 !important;
 }
 
 .navbar ul {
@@ -57,19 +75,42 @@
   gap: 2.5vw;
 }
 
-.navbar li.left-item { 
+.navbar li.left-item {
   font-family: 'Hurmit Nerd Font';
-  position: absolute; left: 1vw;
+  position: absolute;
+  left: 1vw;
   letter-spacing: 0.20em;
   font-weight: bold;
 }
 
-.navbar li.right-item { 
+.navbar li.right-item {
   font-family: 'DepartureMono Nerd Font';
 }
 
 .navbar li {
   display: inline;
+}
+
+.navbar li.right-item a {
+  position: relative;
+  display: inline-block;
+  padding: 0.2rem 0.15rem;
+}
+
+.navbar li.right-item.active a {
+  color: #0077ff;
+  font-weight: 700;
+}
+
+.navbar li.right-item.active a::after {
+  content: "";
+  position: absolute;
+  left: -0.05rem;
+  right: -0.05rem;
+  bottom: -0.28rem;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(0,119,255,0), rgba(0,119,255,0.95), rgba(0,119,255,0));
 }
 
 .navbar a {
@@ -86,20 +127,71 @@
 .navbar .left-item a:hover {
   color: #000;
 }
-  
+
 footer {
   font-family: 'Tinos Nerd Font';
   text-align: center;
   color: rgba(0, 0, 0, 0.8);
   font-size: 0.9rem;
-  position: fixed;
+  position: fixed !important;
   bottom: 0;
   width: 100vw;
   height: 8vh;
+  z-index: 1200 !important;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.5);
 }
-  
+
 footer p {
   margin: 5px 0;
+}
+
+/* Responsive only for smaller screens; desktop style remains unchanged */
+@media (max-width: 1024px) {
+  body {
+    padding-bottom: 92px;
+  }
+
+  .navbar {
+    width: 100vw;
+    height: auto;
+    min-height: 72px;
+    padding: 0.7rem 1rem;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(6px);
+  }
+
+  .navbar ul {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+  }
+
+  .navbar li.left-item {
+    position: static;
+    flex: 1 1 100%;
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+
+  .navbar a {
+    font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+  }
+
+  .navbar li.right-item.active a::after {
+    bottom: -0.2rem;
+  }
+
+  footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    min-height: 64px;
+    height: auto;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 -6px 14px rgba(0, 0, 0, 0.35);
+  }
 }
