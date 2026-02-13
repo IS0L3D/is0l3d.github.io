@@ -6,8 +6,15 @@
     <description>Recent content on IS0L3D</description>
     <generator>Hugo</generator>
     <language>es</language>
-    <lastBuildDate>Sun, 07 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Noteshare (WEB) - Snyk CTF</title>
+      <link>http://localhost:1313/writeups/ctfs/noteshare/</link>
+      <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/ctfs/noteshare/</guid>
+      <description>Cadena de SQLi, escalada de privilegios y RCE en Noteshare.</description>
+    </item>
     <item>
       <title>Workflow rapido con Burp</title>
       <link>http://localhost:1313/notas/web/workflow-burp/</link>
