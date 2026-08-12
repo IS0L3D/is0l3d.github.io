@@ -1,0 +1,11 @@
+{
+  "schema": "provider-status/v1",
+  "provider": "Coffeehaus Review Integrity",
+  "component": "authorization-context-replication",
+  "status": "degraded",
+  "incident_id": "RIP-4837",
+  "observed_at": "2026-08-12T19:21:14Z",
+  "revision": "ede09e84b8a382f5b840a123",
+  "summary": "Authorization context replication is delayed in us-east-1.",
+  "resolution_state": "monitoring"
+}
